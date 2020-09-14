@@ -2,6 +2,7 @@ $(function () {
   initTable()
 
   function initTable() {
+    //不需要带内容，直接加在接口了
     $.get('/my/article/cates', function (res) {
       if (res.status === 0) {
         console.log(res.data)
@@ -23,9 +24,8 @@ $(function () {
     // content:''（将来是表单）
     // open()和close()
     // icon:1
-
     var strAddHtml = $('#tpl-add').html()
-
+    //
     addIndex = layui.layer.open({
       type: 1,
       area: ['500px', '250px'],
@@ -40,7 +40,9 @@ $(function () {
   // 给body绑定submit事件，触发事件的对象是表单
   $('body').on('submit', '#addForm', function (e) {
     e.preventDefault()
+    // 输入内容格式化
     var formdata = $(this).serialize()
+
     $.post('/my/article/addcates', formdata, function (res) {
       if (res.status === 0) {
         console.log(res.message)
@@ -55,6 +57,7 @@ $(function () {
   // 代理事件-编辑分类
   $('tbody').on('click', '.btn-edit', function (e) {
     e.preventDefault()
+    //从页面上获取内容
     var strEditHtml = $('#tpl-edit').html()
 
     editIndex = layui.layer.open({
